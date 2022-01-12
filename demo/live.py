@@ -21,7 +21,7 @@ def cv2_demo(net, transform):
     def predict(frame):
         height, width = frame.shape[:2]
         x = torch.from_numpy(transform(frame)[0]).permute(2, 0, 1)
-        x = Variable(x.unsqueeze(0))
+        x = x.unsqueeze(0)
         y = net(x)  # forward pass
         detections = y.data
         # scale each detection back up to the image

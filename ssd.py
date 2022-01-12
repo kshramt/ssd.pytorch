@@ -31,7 +31,7 @@ class SSD(nn.Module):
         self.num_classes = num_classes
         self.cfg = (coco, voc)[num_classes == 21]
         self.priorbox = PriorBox(self.cfg)
-        self.priors = Variable(self.priorbox.forward(), volatile=True)
+        self.priors = self.priorbox.forward()
         self.size = size
 
         # SSD network
@@ -56,7 +56,7 @@ class SSD(nn.Module):
         Return:
             Depending on phase:
             test:
-                Variable(tensor) of output class label predictions,
+                tensor of output class label predictions,
                 confidence score, and corresponding location predictions for
                 each object detected. Shape: [batch,topk,7]
 
